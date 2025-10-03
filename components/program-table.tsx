@@ -39,6 +39,32 @@ const priorityColors: Record<string, string> = {
   Low: "bg-muted text-muted-foreground",
 }
 
+const teamColors: Record<string, string> = {
+  Marketing: "bg-blue-100 text-blue-800 border-blue-200",
+  Engineering: "bg-green-100 text-green-800 border-green-200",
+  Product: "bg-purple-100 text-purple-800 border-purple-200",
+  Sales: "bg-orange-100 text-orange-800 border-orange-200",
+  Partnerships: "bg-pink-100 text-pink-800 border-pink-200",
+  HR: "bg-yellow-100 text-yellow-800 border-yellow-200",
+  DevOps: "bg-gray-100 text-gray-800 border-gray-200",
+  Security: "bg-red-100 text-red-800 border-red-200",
+  Design: "bg-indigo-100 text-indigo-800 border-indigo-200",
+  "Data Science": "bg-teal-100 text-teal-800 border-teal-200",
+  "Customer Success": "bg-emerald-100 text-emerald-800 border-emerald-200",
+}
+
+const ownerColors: Record<string, string> = {
+  "Anurag Kumar": "bg-slate-100 text-slate-800 border-slate-200",
+  "Sarah Johnson": "bg-blue-100 text-blue-800 border-blue-200",
+  "Michael Chen": "bg-green-100 text-green-800 border-green-200",
+  "Emily Rodriguez": "bg-purple-100 text-purple-800 border-purple-200",
+  "David Kim": "bg-orange-100 text-orange-800 border-orange-200",
+  "Jessica Martinez": "bg-pink-100 text-pink-800 border-pink-200",
+  "Alex Thompson": "bg-indigo-100 text-indigo-800 border-indigo-200",
+  "Robert Lee": "bg-teal-100 text-teal-800 border-teal-200",
+  "Amanda White": "bg-emerald-100 text-emerald-800 border-emerald-200",
+}
+
 export function ProgramTable({ programs }: ProgramTableProps) {
   const [columnWidths, setColumnWidths] = useState({
     goals: 200,
@@ -225,11 +251,13 @@ export function ProgramTable({ programs }: ProgramTableProps) {
               >
                 <div className="line-clamp-2">{program.tasks}</div>
               </td>
-              <td
-                className="px-2.5 py-2 text-xs text-foreground border-r border-border/40"
-                style={{ width: columnWidths.team }}
-              >
-                {program.team}
+              <td className="px-2.5 py-2 border-r border-border/40" style={{ width: columnWidths.team }}>
+                <Badge
+                  variant="outline"
+                  className={`${teamColors[program.team] || "bg-gray-100 text-gray-800 border-gray-200"} text-xs font-medium`}
+                >
+                  {program.team}
+                </Badge>
               </td>
               <td className="px-2.5 py-2 border-r border-border/40" style={{ width: columnWidths.priority }}>
                 <Badge
@@ -239,11 +267,13 @@ export function ProgramTable({ programs }: ProgramTableProps) {
                   {program.priority}
                 </Badge>
               </td>
-              <td
-                className="px-2.5 py-2 text-xs text-foreground border-r border-border/40"
-                style={{ width: columnWidths.owner }}
-              >
-                {program.owner}
+              <td className="px-2.5 py-2 border-r border-border/40" style={{ width: columnWidths.owner }}>
+                <Badge
+                  variant="outline"
+                  className={`${ownerColors[program.owner] || "bg-gray-100 text-gray-800 border-gray-200"} text-xs font-medium`}
+                >
+                  {program.owner}
+                </Badge>
               </td>
               <td className="px-2.5 py-2 border-r border-border/40" style={{ width: columnWidths.status }}>
                 <Badge variant="secondary" className={`${statusColors[program.status]} border-0 text-xs font-medium`}>
