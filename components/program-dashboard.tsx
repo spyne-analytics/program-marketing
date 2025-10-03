@@ -88,7 +88,7 @@ export default function ProgramDashboard() {
     total: marketingPrograms.length,
     inProgress: marketingPrograms.filter((p) => p.status === "In Progress").length,
     ongoing: marketingPrograms.filter((p) => p.status === "Ongoing").length,
-    toBePicked: marketingPrograms.filter((p) => p.status === "To be picked").length,
+    toPick: marketingPrograms.filter((p) => p.status === "To be picked").length,
     completed: marketingPrograms.filter((p) => p.status === "Completed").length,
   }
 
@@ -100,35 +100,35 @@ export default function ProgramDashboard() {
           <div className="flex items-center gap-2">
             <button
               onClick={() => setStatusFilter("all")}
-              className="rounded-md border border-border bg-background px-2 py-1 transition-all hover:border-primary hover:shadow-sm"
+              className="rounded-md border border-border bg-background px-3 py-1 transition-all hover:border-primary hover:shadow-sm w-[80px]"
             >
               <div className="text-[10px] font-medium text-muted-foreground">Total</div>
               <div className="text-base font-semibold text-foreground">{stats.total}</div>
             </button>
             <button
               onClick={() => setStatusFilter("In Progress")}
-              className="rounded-md border border-border bg-background px-2 py-1 transition-all hover:border-[var(--status-blue)] hover:shadow-sm"
+              className="rounded-md border border-border bg-background px-3 py-1 transition-all hover:border-[var(--status-blue)] hover:shadow-sm w-[80px]"
             >
               <div className="text-[10px] font-medium text-muted-foreground">In Progress</div>
               <div className="text-base font-semibold text-[var(--status-blue)]">{stats.inProgress}</div>
             </button>
             <button
               onClick={() => setStatusFilter("Ongoing")}
-              className="rounded-md border border-border bg-background px-2 py-1 transition-all hover:border-[var(--status-purple)] hover:shadow-sm"
+              className="rounded-md border border-border bg-background px-3 py-1 transition-all hover:border-[var(--status-purple)] hover:shadow-sm w-[80px]"
             >
               <div className="text-[10px] font-medium text-muted-foreground">Ongoing</div>
               <div className="text-base font-semibold text-[var(--status-purple)]">{stats.ongoing}</div>
             </button>
             <button
               onClick={() => setStatusFilter("To be picked")}
-              className="rounded-md border border-border bg-background px-2 py-1 transition-all hover:border-[var(--status-orange)] hover:shadow-sm"
+              className="rounded-md border border-border bg-background px-3 py-1 transition-all hover:border-[var(--status-orange)] hover:shadow-sm w-[80px]"
             >
-              <div className="text-[10px] font-medium text-muted-foreground">To be picked</div>
-              <div className="text-base font-semibold text-[var(--status-orange)]">{stats.toBePicked}</div>
+              <div className="text-[10px] font-medium text-muted-foreground">To Pick</div>
+              <div className="text-base font-semibold text-[var(--status-orange)]">{stats.toPick}</div>
             </button>
             <button
               onClick={() => setStatusFilter("Completed")}
-              className="rounded-md border border-border bg-background px-2 py-1 transition-all hover:border-[var(--status-green)] hover:shadow-sm"
+              className="rounded-md border border-border bg-background px-3 py-1 transition-all hover:border-[var(--status-green)] hover:shadow-sm w-[80px]"
             >
               <div className="text-[10px] font-medium text-muted-foreground">Completed</div>
               <div className="text-base font-semibold text-[var(--status-green)]">{stats.completed}</div>
