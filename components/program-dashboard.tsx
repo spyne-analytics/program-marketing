@@ -6,7 +6,9 @@ import { Input } from "@/components/ui/input"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import { ProgramTable } from "@/components/program-table"
 
-const marketingPrograms = [
+// All programs data from Google Sheet - filtered to show only Marketing team
+const allProgramsData = [
+  // Marketing Programs (rows 2-5 from your sheet)
   {
     id: "1",
     goals: "Mission25 - Spyne Brand Enhancement",
@@ -60,6 +62,9 @@ const marketingPrograms = [
     notes: "",
   },
 ]
+
+// Filter to show only Marketing team data
+const marketingPrograms = allProgramsData.filter(program => program.team === "Marketing")
 
 export default function ProgramDashboard() {
   const [searchQuery, setSearchQuery] = useState("")
