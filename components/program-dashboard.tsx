@@ -1,60 +1,74 @@
 "use client"
 
-import { useState, useEffect } from "react"
+import { useState } from "react"
 import { Search, ExternalLink } from "lucide-react"
 import { Input } from "@/components/ui/input"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import { ProgramTable } from "@/components/program-table"
 
-interface Partnership {
-  id: string
-  goals: string
-  tasks: string
-  team: string
-  priority: string
-  owner: string
-  status: string
-  eta: string
-  completionDate: string
-  links: string
-  notes: string
-}
+// Marketing programs data from Google Sheet
+const marketingPrograms = [
+  {
+    id: "1",
+    goals: "Mission25 - Spyne Brand Enhancement",
+    tasks: "Testimonials",
+    team: "Marketing",
+    priority: "P0",
+    owner: "Anurag Kumar",
+    status: "In Progress",
+    eta: "2025-11-30",
+    completionDate: "",
+    links: "",
+    notes: "",
+  },
+  {
+    id: "2",
+    goals: "Mission25 - Spyne Brand Enhancement",
+    tasks: "Influencer tie-ups / Podcasts (10)",
+    team: "Marketing",
+    priority: "P0",
+    owner: "Anurag Kumar",
+    status: "In Progress",
+    eta: "2025-11-30",
+    completionDate: "",
+    links: "",
+    notes: "",
+  },
+  {
+    id: "3",
+    goals: "Mission25 - Spyne Brand Enhancement",
+    tasks: "State dealer shows (10 till Dec)",
+    team: "Marketing",
+    priority: "P0",
+    owner: "Anurag Kumar",
+    status: "In Progress",
+    eta: "2025-11-30",
+    completionDate: "",
+    links: "",
+    notes: "",
+  },
+  {
+    id: "4",
+    goals: "Mission25 - Spyne Brand Enhancement",
+    tasks: "Referral Program",
+    team: "Marketing",
+    priority: "P0",
+    owner: "Anurag Kumar",
+    status: "In Progress",
+    eta: "2025-11-30",
+    completionDate: "",
+    links: "",
+    notes: "",
+  },
+]
 
 export default function ProgramDashboard() {
   const [searchQuery, setSearchQuery] = useState("")
   const [statusFilter, setStatusFilter] = useState("all")
   const [priorityFilter, setPriorityFilter] = useState("all")
   const [ownerFilter, setOwnerFilter] = useState("all")
-  const [partnerships, setPartnerships] = useState<Partnership[]>([])
-  const [loading, setLoading] = useState(true)
 
-  // Fetch partnerships data from API
-  useEffect(() => {
-    const fetchPartnerships = async () => {
-      try {
-        const response = await fetch('/api/partnerships')
-        if (response.ok) {
-          const data = await response.json()
-          setPartnerships(data)
-        } else {
-          console.error('Failed to fetch partnerships data')
-        }
-      } catch (error) {
-        console.error('Error fetching partnerships:', error)
-      } finally {
-        setLoading(false)
-      }
-    }
-
-    fetchPartnerships()
-  }, [])
-
-  // Get unique values for filters
-  const uniqueTeams = [...new Set(partnerships.map(p => p.team).filter(Boolean))]
-  const uniqueOwners = [...new Set(partnerships.map(p => p.owner).filter(Boolean))]
-  const uniquePriorities = [...new Set(partnerships.map(p => p.priority).filter(Boolean))]
-
-  const filteredPrograms = partnerships.filter((program) => {
+  const filteredPrograms = marketingPrograms.filter((program) => {
     const matchesSearch =
       searchQuery === "" ||
       program.goals.toLowerCase().includes(searchQuery.toLowerCase()) ||
@@ -71,21 +85,11 @@ export default function ProgramDashboard() {
   })
 
   const stats = {
-    total: partnerships.length,
-    inProgress: partnerships.filter((p) => p.status === "In Progress").length,
-    ongoing: partnerships.filter((p) => p.status === "Ongoing").length,
-    toPick: partnerships.filter((p) => p.status === "To be picked").length,
-    completed: partnerships.filter((p) => p.status === "Completed").length,
-  }
-
-  if (loading) {
-    return (
-      <div className="min-h-screen bg-background p-4">
-        <div className="mx-auto max-w-[1600px] flex items-center justify-center h-64">
-          <div className="text-muted-foreground">Loading partnerships data...</div>
-        </div>
-      </div>
-    )
+    total: marketingPrograms.length,
+    inProgress: marketingPrograms.filter((p) => p.status === "In Progress").length,
+    ongoing: marketingPrograms.filter((p) => p.status === "Ongoing").length,
+    toPick: marketingPrograms.filter((p) => p.status === "To be picked").length,
+    completed: marketingPrograms.filter((p) => p.status === "Completed").length,
   }
 
   return (
@@ -165,11 +169,7 @@ export default function ProgramDashboard() {
               </SelectTrigger>
               <SelectContent>
                 <SelectItem value="all">All Priority</SelectItem>
-                {uniquePriorities.map((priority) => (
-                  <SelectItem key={priority} value={priority}>
-                    {priority}
-                  </SelectItem>
-                ))}
+                <SelectItem value="P0">P0</SelectItem>
               </SelectContent>
             </Select>
 
@@ -179,11 +179,7 @@ export default function ProgramDashboard() {
               </SelectTrigger>
               <SelectContent>
                 <SelectItem value="all">All Owners</SelectItem>
-                {uniqueOwners.map((owner) => (
-                  <SelectItem key={owner} value={owner}>
-                    {owner}
-                  </SelectItem>
-                ))}
+                <SelectItem value="Anurag Kumar">Anurag Kumar</SelectItem>
               </SelectContent>
             </Select>
 
